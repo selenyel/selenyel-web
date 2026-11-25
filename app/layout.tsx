@@ -1,14 +1,28 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ProgressRail } from "@/components/ProgressRail";
 import { CommandPalette } from "@/components/CommandPalette";
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fefcfa" },
+    { media: "(prefers-color-scheme: dark)", color: "#141c21" },
+  ],
+};
 
 export const metadata: Metadata = {
   title: "Selen Yel Temellioğlu — Lead Designer & Frontend Engineer",
   description:
     "Lead Designer and frontend engineer building 0-to-1 design systems, multi-state US healthcare platforms, clinical AI apps, and AI-driven banking products across watch, phone, and web.",
   metadataBase: new URL("https://selenyel.com"),
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "32x32" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+  },
   openGraph: {
     title: "Selen Yel Temellioğlu — Lead Designer & Frontend Engineer",
     description:

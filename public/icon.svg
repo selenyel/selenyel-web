@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="v1-light" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="90">
+      <stop offset="0%" stop-color="#141C21" />
+      <stop offset="50%" stop-color="#5E707B" />
+      <stop offset="100%" stop-color="#141C21" />
+    </linearGradient>
+    <linearGradient id="v1-dark" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="90">
+      <stop offset="0%" stop-color="#FEFCFA" />
+      <stop offset="50%" stop-color="#9EB0BC" />
+      <stop offset="100%" stop-color="#FEFCFA" />
+    </linearGradient>
+  </defs>
+  <style>
+    .dark { display: none; }
+    @media (prefers-color-scheme: dark) {
+      .light { display: none; }
+      .dark { display: inline; }
+    }
+  </style>
+  <g class="light" transform="translate(2.0, 2.0) scale(0.3111)" fill="none" stroke="url(#v1-light)" stroke-width="7.0" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M86 4 H24.5 A20.5 20.5 0 0 0 24.5 45 H65.5 A20.5 20.5 0 0 1 65.5 86 H4" />
+    <path d="M86 14 H24.5 A10.5 10.5 0 0 0 24.5 35" />
+    <path d="M65.5 55 A10.5 10.5 0 0 1 65.5 76 H4" />
+  </g>
+  <g class="dark" transform="translate(2.0, 2.0) scale(0.3111)" fill="none" stroke="url(#v1-dark)" stroke-width="7.0" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M86 4 H24.5 A20.5 20.5 0 0 0 24.5 45 H65.5 A20.5 20.5 0 0 1 65.5 86 H4" />
+    <path d="M86 14 H24.5 A10.5 10.5 0 0 0 24.5 35" />
+    <path d="M65.5 55 A10.5 10.5 0 0 1 65.5 76 H4" />
+  </g>
+</svg>
