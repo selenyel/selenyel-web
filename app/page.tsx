@@ -22,15 +22,8 @@ import { ScientificUxLab } from "@/components/labs/ScientificUxLab";
 export default function HomePage() {
   return (
     <main id="main">
-      {/* ===================== HERO ===================== */}
-      <header
-        id="top"
-        style={{
-          position: "relative",
-          paddingBottom: "var(--gap-section)",
-          overflow: "hidden",
-        }}
-      >
+      {/* ===================== HERO (FULL-VIEWPORT OPENING COVER) ===================== */}
+      <header id="top" className="hero-cover">
         <img
           src="/images/bg-canvas.webp"
           alt=""
@@ -45,59 +38,36 @@ export default function HomePage() {
             zIndex: 0,
           }}
         />
-        <div className="wrap" style={{ position: "relative", zIndex: 2 }}>
+        <div className="wrap hero-cover-inner">
           <TopUtilityBar />
 
-          <div
-            className="hero-grid"
-            data-inspect-box="hero"
-            style={{ marginTop: "clamp(3rem, 7vw, 6.2rem)" }}
-          >
-            <div>
-              <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap", marginBottom: "clamp(1.2rem, 3vw, 2.1rem)" }}>
-                <p
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: "var(--step-1)",
-                    fontWeight: 500,
-                    color: "var(--graphite)",
-                    margin: 0,
-                  }}
-                >
-                  Selen Yel Temellioğlu
+          <div className="hero-main">
+            <div className="hero-grid" data-inspect-box="hero">
+              <div>
+                <div className="hero-name-row">
+                  <p className="hero-name">Selen Yel Temellioğlu</p>
+                  <InspectTag token="--step-4" detail="100svh cover · max-width: 17ch" />
+                </div>
+
+                <h1 className="hero-title">
+                  I design software for people whose hands are already full.
+                </h1>
+
+                <p className="hero-lead">
+                  I&apos;m a Lead Designer and frontend engineer at OneWell Health Care, shaping
+                  multi-state US healthcare platforms across 12 states alongside clinical AI
+                  (iOS, Android &amp; web) and AI-driven banking products.
+                  <span className="hero-lead-extended">
+                    {" "}
+                    From brand, typography, and custom iconography to APCA design tokens,
+                    React/TypeScript libraries, and AI-agent engineering guidelines, I own both
+                    the research and the code that ships it.
+                  </span>
                 </p>
-                <InspectTag token="--step-4" detail="max-width: 17ch" />
               </div>
 
-              <h1
-                style={{
-                  fontSize: "var(--step-4)",
-                  fontWeight: 500,
-                  maxWidth: "17ch",
-                  marginBottom: "clamp(1.4rem, 3vw, 2.2rem)",
-                }}
-              >
-                I design software for people whose hands are already full.
-              </h1>
-
-              <p
-                style={{
-                  maxWidth: "56ch",
-                  color: "var(--graphite)",
-                  fontSize: "var(--step-1)",
-                  lineHeight: 1.56,
-                  margin: 0,
-                }}
-              >
-                I&apos;m a Lead Designer and frontend engineer at OneWell Health Care, shaping
-                multi-state US healthcare platforms across 12 states alongside clinical AI
-                (iOS, Android &amp; web) and AI-driven banking products. From brand, typography,
-                and custom iconography to APCA design tokens, React/TypeScript libraries, and
-                AI-agent engineering guidelines, I own both the research and the code that ships it.
-              </p>
+              <HeroPortrait />
             </div>
-
-            <HeroPortrait />
           </div>
 
           <HeroAppearanceBar />

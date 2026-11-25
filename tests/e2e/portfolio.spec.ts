@@ -99,6 +99,71 @@ test.describe("selenyel.com flagship verification", () => {
     expect(errors).toEqual([]);
   });
 
+  test("opening viewport framing holds across tall desktop, portrait phone, and sideways phone (844x390)", async ({
+    page,
+  }) => {
+    // 1. Tall desktop (1440x1080): Shipped work must NOT peek into opening cover
+    await page.setViewportSize({ width: 1440, height: 1080 });
+    await page.goto("/", { waitUntil: "networkidle" });
+    const tallMetrics = await page.evaluate(() => {
+      const workTop = document.getElementById("work")!.getBoundingClientRect().top;
+      const barBottom = document.querySelector(".hero-appearance")!.getBoundingClientRect().bottom;
+      return { workTop, barBottom, vh: window.innerHeight };
+    });
+    expect(tallMetrics.workTop).toBeGreaterThanOrEqual(tallMetrics.vh - 1);
+    expect(tallMetrics.barBottom).toBeLessThanOrEqual(tallMetrics.vh);
+    if (process.env.CAPTURE_DIR) {
+      await page.screenshot({ path: `${process.env.CAPTURE_DIR}/cover-desktop-1080.png`, fullPage: false });
+    }
+
+    // 2. Portrait phone (390x844): Complete cover fits above the 54px bottom rail, zero overflow
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.waitForTimeout(120);
+    const portraitMetrics = await page.evaluate(() => {
+      const workTop = document.getElementById("work")!.getBoundingClientRect().top;
+      const barBottom = document.querySelector(".hero-appearance")!.getBoundingClientRect().bottom;
+      const overflow = document.documentElement.scrollWidth > window.innerWidth;
+      return { workTop, barBottom, overflow, usableH: window.innerHeight - 54 };
+    });
+    expect(portraitMetrics.overflow).toBe(false);
+    expect(portraitMetrics.barBottom).toBeLessThanOrEqual(portraitMetrics.usableH + 2);
+    expect(portraitMetrics.workTop).toBeGreaterThanOrEqual(portraitMetrics.usableH - 2);
+    if (process.env.CAPTURE_DIR) {
+      await page.screenshot({ path: `${process.env.CAPTURE_DIR}/cover-mobile-portrait.png`, fullPage: false });
+    }
+
+    // 3. Sideways phone (844x390): Summarized bio active, entire opening cover fits inside 390px height!
+    await page.setViewportSize({ width: 844, height: 390 });
+    await page.waitForTimeout(120);
+    const landscapeMetrics = await page.evaluate(() => {
+      const workTop = document.getElementById("work")!.getBoundingClientRect().top;
+      const barBottom = document.querySelector(".hero-appearance")!.getBoundingClientRect().bottom;
+      const extendedDisplay = getComputedStyle(document.querySelector(".hero-lead-extended")!).display;
+      const overflow = document.documentElement.scrollWidth > window.innerWidth;
+      return { workTop, barBottom, extendedDisplay, overflow, vh: window.innerHeight };
+    });
+    expect(landscapeMetrics.overflow).toBe(false);
+    expect(landscapeMetrics.extendedDisplay).toBe("none");
+    expect(landscapeMetrics.barBottom).toBeLessThanOrEqual(landscapeMetrics.vh + 2);
+    expect(landscapeMetrics.workTop).toBeGreaterThanOrEqual(landscapeMetrics.vh - 1);
+    if (process.env.CAPTURE_DIR) {
+      await page.screenshot({ path: `${process.env.CAPTURE_DIR}/cover-mobile-landscape.png`, fullPage: false });
+    }
+
+    // 4. Case study on sideways phone (844x390): zero overflow & specimen immediately visible
+    await page.goto("/work/dioscorium", { waitUntil: "networkidle" });
+    const caseLandscape = await page.evaluate(() => {
+      const overflow = document.documentElement.scrollWidth > window.innerWidth;
+      const specimenTop = document.querySelector(".case-specimen-card")!.getBoundingClientRect().top;
+      return { overflow, specimenTop, vh: window.innerHeight };
+    });
+    expect(caseLandscape.overflow).toBe(false);
+    expect(caseLandscape.specimenTop).toBeLessThan(caseLandscape.vh);
+    if (process.env.CAPTURE_DIR) {
+      await page.screenshot({ path: `${process.env.CAPTURE_DIR}/case-mobile-landscape.png`, fullPage: false });
+    }
+  });
+
   test("all 6 case studies and /api/health render cleanly with zero WCAG A/AA violations", async ({
     page,
     request,

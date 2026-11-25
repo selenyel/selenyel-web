@@ -9,15 +9,7 @@ export function TopUtilityBar() {
   const { setCmdOpen } = useTheme();
 
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        gap: "1rem",
-        padding: "1.15rem 0 0",
-      }}
-    >
+    <div className="top-bar">
       <Link
         href="/"
         className="spec"
@@ -73,17 +65,7 @@ export function HeroAppearanceBar() {
   const { theme, setTheme, inspect, setInspect } = useTheme();
 
   return (
-    <div
-      style={{
-        marginTop: "clamp(2rem, 4vw, 3rem)",
-        paddingTop: "1.25rem",
-        borderTop: "var(--guide-w) var(--guide-style) var(--guide)",
-        display: "flex",
-        alignItems: "center",
-        gap: "0.85rem",
-        flexWrap: "wrap",
-      }}
-    >
+    <div className="hero-appearance">
       <span className="spec" id="appearance-label">
         Appearance
       </span>
@@ -119,6 +101,11 @@ export function HeroAppearanceBar() {
       </button>
 
       <InspectTag token="--paper / --ink" showLiveApca />
+
+      <a href="#work" className="hero-scroll-cue">
+        <span>Shipped work</span>
+        <span aria-hidden="true">↓</span>
+      </a>
     </div>
   );
 }
