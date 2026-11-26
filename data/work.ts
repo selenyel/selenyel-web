@@ -124,7 +124,7 @@ export const SHIPPED_PROJECTS: ShippedProject[] = [
     scale: "10 Clinical Modules · iOS, Android & Web",
     platforms: ["iOS", "Android", "Web", "SaMD / IEC 62366-1", "APCA 0.98G"],
     hipaaNotice:
-      "Clinical module names and color tokens below reflect design-system architecture; no patient diagnostics or PHI are displayed.",
+      "The interactive clinical cockpit below is a reimagined design-system reconstruction using 100% synthetic cardiology telemetry; zero proprietary production screens or real patient PHI are displayed.",
     previewKind: "dioscorium",
     summaryMetrics: [
       { label: "Clinical Surfaces", value: "10 Modules" },
@@ -132,23 +132,24 @@ export const SHIPPED_PROJECTS: ShippedProject[] = [
       { label: "Regulatory Context", value: "SaMD / IEC 62366-1" },
     ],
     brief:
-      "Clinicians navigating ten specialized cardiology AI modules (ESC AI, Cardio Risk, Med AI, Lab AI, Hypertension, Symptomatic, Preoperative, Echo AI, ECG AI, Dashboard) need immediate spatial orientation without sacrificing legibility or inducing dark-screen halation under harsh clinic lighting.",
+      "Cardiologists navigating ten specialized AI modules (ESC AI, Cardio Risk, Med AI, Lab AI, Hypertension, Symptomatic, Preoperative, Echo AI, ECG AI, Dashboard) cannot afford consumer-app visual noise, SaaS marketing banners eating prime clinical space, or low-contrast dark surfaces. The live workstation above presents an unconstrained re-architecture of the clinical interface grounded in SaMD / IEC 62366-1 usability engineering and APCA 0.98G color science.",
     researchAndTelemetry: [
-      "Evaluated color-coded navigation drawers under clinic-like ambient lighting and dimmed exam-room viewing conditions, identifying where semi-transparent white tints lose luminance contrast and where >Lc 90 triggers halation bloom.",
-      "Mapped multi-organization tenancy and care-relationship RBAC workflows so permissions stay explicit and auditable across clinical roles.",
+      "Audited clinical workspace ergonomics under bright exam-room and dimmed cath-lab viewing conditions—identifying how decorative SaaS hero banners, duplicated rainbow launcher cards, and muddy mid-gray dark surfaces increase cognitive load and alarm fatigue.",
+      "Evaluated color-coded navigation drawers where semi-transparent white tints degrade luminance contrast and where >Lc 90 triggers dark-room halation bloom.",
+      "Mapped multi-organization tenancy, ESC guideline evidence traceability, and explicit human-in-the-loop sign-off points so AI recommendations stay transparent and auditable.",
     ],
     systemAndCraft: [
-      "Designed Dioscorium Mobile natively for both iOS and Android alongside web workspace layouts under SaMD / IEC 62366-1 usability-engineering discipline.",
-      "Engineered a parametric per-theme color token rule (two pinned luminance constants Y ~ 0.84 and Y ~ 0.70 plus a per-module hue parameter) instead of ten fragile hand-picked palettes.",
-      "Verified every module's inactive and active text pairs with APCA 0.98G (Lc 78.6-87.3 inactive; Lc ~77 active at 15px/700) and WCAG 2.x AAA/AA cross-checks.",
+      "Designed Dioscorium natively for iOS, Android, and clinical web under SaMD / IEC 62366-1 discipline—then re-architected the showcase above into a telemetry-first cockpit (try switching Exam Room / Cath Lab lighting and APCA Rail / Quiet Rail alarm-fatigue mode live).",
+      "Engineered a parametric per-theme color token rule (pinned luminance constants Y ~ 0.84 and Y ~ 0.70 plus a per-module hue parameter) instead of ten fragile hand-picked palettes.",
+      "Verified every module's inactive and active text pairs with APCA 0.98G (Lc 78.6-87.3 inactive; Lc ~77 active at 15px/700) and WCAG 2.x AAA/AA cross-checks, while reserving saturated semantic color strictly for clinical thresholds.",
     ],
     outcomes: [
       "Guaranteed contrast by construction across all 10 clinical surfaces—new modules inherit verified accessibility automatically from a single hue parameter.",
-      "Preserved subtle tinted-glass cohesion without real alpha-transparency contrast degradation.",
-      "Delivered consistent multi-platform UX patterns spanning iOS, Android, and multi-tenant clinical web.",
+      "Replaced decorative launcher clutter with immediate synthetic telemetry (Lead II ECG strip, 14-day BP trend, ESC evidence citations) and explicit clinician sign-off controls.",
+      "Delivered consistent multi-platform UX patterns spanning iOS, Android, and multi-tenant clinical web without leaking proprietary production artifacts.",
     ],
     galleryNote:
-      "Drop sanitized Dioscorium iOS/Android screens into public/media/work/dioscorium/ to pair alongside the live 10-module APCA switcher.",
+      "The live interactive clinical cockpit above runs purely on synthetic cardiology data and verified APCA 0.98G tokens.",
   },
   {
     slug: "luwian",

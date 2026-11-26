@@ -1,9 +1,12 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { DIOSCORIUM_SURFACES, evaluateContrast } from "@/lib/apca";
 import type { ShippedProject } from "@/data/work";
 import { useTheme } from "@/components/ThemeProvider";
+import {
+  DioscoriumCardThumbnail,
+  DioscoriumCockpit,
+} from "@/components/previews/DioscoriumCockpit";
 
 export function ProjectPreview({
   kind,
@@ -239,102 +242,7 @@ function C2sCommandPreview({ interactive }: { interactive: boolean }) {
 }
 
 function DioscoriumPreview({ interactive }: { interactive: boolean }) {
-  const [selectedId, setSelectedId] = useState<string>(DIOSCORIUM_SURFACES[0].id);
-  const surface =
-    DIOSCORIUM_SURFACES.find((s) => s.id === selectedId) ?? DIOSCORIUM_SURFACES[0];
-  const inactiveEval = evaluateContrast(surface.inactiveText, surface.panelBg);
-  const activeEval = evaluateContrast(surface.activeText, surface.activePill);
-
-  const visibleList = interactive ? DIOSCORIUM_SURFACES : DIOSCORIUM_SURFACES.slice(0, 5);
-
-  return (
-    <div
-      data-vision-stage="true"
-      style={{
-        background: surface.panelBg,
-        color: surface.inactiveText,
-        borderRadius: "var(--radius-s)",
-        padding: interactive ? "1.25rem" : "0.95rem",
-        display: "flex",
-        flexDirection: "column",
-        gap: "0.7rem",
-        width: "100%",
-        border: "1px solid rgba(255,255,255,0.16)",
-        transition: "background-color 0.22s ease-out",
-      }}
-    >
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "0.5rem", flexWrap: "wrap" }}>
-        <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.7rem", color: surface.inactiveText }}>
-          SaMD · IEC 62366-1 · Hue {surface.hue}°
-        </span>
-        <span
-          style={{
-            fontFamily: "var(--font-mono)",
-            fontSize: "0.68rem",
-            background: surface.activePill,
-            color: surface.activeText,
-            padding: "0.14rem 0.5rem",
-            borderRadius: "999px",
-            fontWeight: 700,
-          }}
-        >
-          Lc {inactiveEval.lc} / {activeEval.lc} · {activeEval.wcagGrade}
-        </span>
-      </div>
-
-      {interactive ? (
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem" }} role="group" aria-label="Dioscorium 10 clinical modules">
-          {visibleList.map((s) => {
-            const on = s.id === surface.id;
-            return (
-              <button
-                key={s.id}
-                type="button"
-                aria-pressed={on}
-                onClick={() => setSelectedId(s.id)}
-                style={{
-                  border: on ? "1px solid transparent" : "1px solid rgba(255,255,255,0.28)",
-                  borderRadius: "999px",
-                  padding: "0.28rem 0.65rem",
-                  fontSize: "0.76rem",
-                  fontWeight: on ? 700 : 500,
-                  cursor: "pointer",
-                  background: on ? surface.activePill : "transparent",
-                  color: on ? surface.activeText : surface.inactiveText,
-                }}
-              >
-                {s.name}
-              </button>
-            );
-          })}
-        </div>
-      ) : (
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem" }}>
-          {visibleList.map((s, i) => (
-            <span
-              key={s.id}
-              style={{
-                borderRadius: "999px",
-                padding: "0.22rem 0.58rem",
-                fontSize: "0.72rem",
-                fontWeight: i === 0 ? 700 : 500,
-                background: i === 0 ? surface.activePill : "rgba(0,0,0,0.16)",
-                color: i === 0 ? surface.activeText : surface.inactiveText,
-              }}
-            >
-              {s.name}
-            </span>
-          ))}
-        </div>
-      )}
-
-      <div style={{ fontSize: "0.76rem", color: surface.inactiveText, lineHeight: 1.45 }}>
-        {interactive
-          ? `${surface.name}: ${surface.clinicalNote} (Panel ${surface.panelBg}, Ink ${surface.inactiveText}, Active ${surface.activeText} on ${surface.activePill})`
-          : "10 luminance-pinned cardiology AI surfaces across iOS, Android & web."}
-      </div>
-    </div>
-  );
+  return interactive ? <DioscoriumCockpit /> : <DioscoriumCardThumbnail />;
 }
 
 function LuwianSpherePreview({ interactive }: { interactive: boolean }) {

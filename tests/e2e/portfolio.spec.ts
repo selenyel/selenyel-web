@@ -187,7 +187,7 @@ test.describe("selenyel.com flagship verification", () => {
     expect([301, 308]).toContain(cvRes.status());
     expect(cvRes.headers()["location"]).toMatch(/\/$/);
 
-    // Verify interactive Dioscorium 10-module hue switcher
+    // Verify interactive Dioscorium reimagined clinical cockpit (10-module hue switcher + Cath Lab + SaMD sign-off)
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("/work/dioscorium", { waitUntil: "networkidle" });
     await page.getByRole("button", { name: "Echo AI" }).click();
@@ -197,7 +197,26 @@ test.describe("selenyel.com flagship verification", () => {
       "rgb(62, 50, 122)"
     );
     if (process.env.CAPTURE_DIR) {
+      await page.locator(".case-specimen-card").scrollIntoViewIfNeeded();
       await page.screenshot({ path: `${process.env.CAPTURE_DIR}/case-dioscorium.png`, fullPage: false });
+    }
+
+    // Switch to Cath Lab obsidian dark + ECG AI waveform + clinician acknowledgement and verify WCAG A/AA
+    await page.getByRole("button", { name: "Cath Lab" }).click();
+    await page.getByRole("button", { name: "ECG AI" }).click();
+    await expect(page.locator('[data-vision-stage="true"]').first()).toHaveCSS(
+      "background-color",
+      "rgb(142, 58, 32)"
+    );
+    await page.getByRole("button", { name: "Review & Acknowledge" }).click();
+    await expect(page.getByRole("button", { name: /Clinician Reviewed/i })).toBeVisible();
+    const cathResults = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+      .analyze();
+    expect(cathResults.violations, "WCAG violations in Dioscorium Cath Lab mode").toEqual([]);
+    if (process.env.CAPTURE_DIR) {
+      await page.locator(".case-specimen-card").scrollIntoViewIfNeeded();
+      await page.screenshot({ path: `${process.env.CAPTURE_DIR}/case-dioscorium-cath.png`, fullPage: false });
     }
   });
 });
